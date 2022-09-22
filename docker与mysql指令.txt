@@ -1,0 +1,48 @@
+Windows下的Mysql启停（监听端口：3306）
+启动：net start mysql
+关闭：net stop mysql
+
+Linux下的Mysql启停
+关闭mysql服务service mysql stop
+启动mysql服务service mysql start
+重启mysql服务service mysql restart
+
+
+
+mysql基本语句：
+连接本地mysql指令:   mysql -u root -p，回车后提示你输密码
+连接远程mysql指令：  mysql -h 110.110.110.110 -u root -p
+退出MYSQL 命令： exit 
+
+show databases;    --查服务器上存在哪些数据库
+use 数据库名;  --选择一个数据库
+show tables;    --查当前数据库中存在哪些表
+select user from mysql.users;   --查用户
+
+
+
+
+
+
+
+下载镜像
+指定版本安装命令 : docker pull mysql:5.7.35
+不指定命令,直接安装最新版是这个命令 : docker pull mysql
+
+
+由于mysql的启动必须要指定密码，因此初次创建的mysql容器的启动必须从dos下以带密码的方式启动，dos下启动命令如下：（启动过一次之后，便可直接从docker图形化控制台按钮启动）
+docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
+说明：第一个端口是宿主机端口，第二个端口是容器内的端口   -p：指定端口映射，格式为：主机(宿主)端口:容器端口
+      –name：为容器指定一个名字   第一个mysql是所创建的容器名称
+	  最后一个mysql:5.7是镜像名称（带版本号）
+	  -d：后台运行容器，并返回容器 id
+
+	  
+容器命令
+查看所有容器指令：docker ps -a
+启动已存在的容器：docker start 容器ID或容器名
+停止一个正在运行的容器： docker stop 容器ID或容器名
+重启一个容器：docker start 容器ID或容器名
+查找最新的mysql镜像：docker search mysql
+在容器中运行命令：docker exec -it mysql bash
+
